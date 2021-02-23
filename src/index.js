@@ -12,6 +12,9 @@ export default class JsSelect {
         this.option = {
             placeholder: 'Placeholder',
             typing: 'Typing...',
+            search: true,
+            canNull: true,
+            maxRow: 5,
             ...options,
         }
         this.constainerElem = document.querySelector(dom);
@@ -53,6 +56,7 @@ export default class JsSelect {
         textInput.classList.add('js-select-input-text');
         imageInput.classList.add('js-select-input-img');
         divDropdownInput.classList.add('js-select-dropdown-input');
+        !this.option.search ? divDropdownInput.classList.add('no-search') : null;
         divDropdownList.classList.add('js-select-dropdown-list');
 
         imageInput.setAttribute('src', icons.arrowDown);
@@ -65,10 +69,13 @@ export default class JsSelect {
     initData() {
         this.elements.textInput.innerText = this.option.placeholder;
         //add data
-        this.data = [
-            {id: null, name: `-- ${this.option.placeholder} --`},
-            ...this.data
-        ];
+        if (this.option.canNull) {
+            this.data = [
+                {id: null, name: `-- ${this.option.placeholder} --`},
+                ...this.data
+            ];
+        }
+
         //render data
         this.itemsElem = this.data.map((item, index) => {
             const container = document.createElement('div');
@@ -76,14 +83,18 @@ export default class JsSelect {
             const checked = document.createElement('img');
             container.appendChild(title);
             container.appendChild(checked);
-            checked.setAttribute('src', index === 0 ? icons.checked : icons.check);
+            if (this.option.canNull) {
+                checked.setAttribute('src', index === 0 ? icons.checked : icons.check);
+                index === 0 ? container.setAttribute('data-checked', 'true') : null;
+            } else {
+                checked.setAttribute('src', icons.check);
+            }
             title.innerText = item.name;
             this.elements.divDropdownList.appendChild(container);
 
             container.classList.add('js-select-item');
             container.classList.add('viewed');
             index === 0 ? container.classList.add('first') : null;
-            index === 0 ? container.setAttribute('data-checked', 'true') : null;
             title.classList.add('js-select-item-title');
             checked.classList.add('js-select-item-image');
 
@@ -137,7 +148,12 @@ export default class JsSelect {
             // this.elements.divDropdown.style.display = 'block';
             this.elements.searchInput.focus();
             this.elements.divInput.classList.add('show-dropdown');
-            this.elements.divDropdown.style.height = ((this.data.length + 1) > 6 ? '262px' : ((this.data.length + 1) * 37 + 'px'));
+            if (this.option.search) {
+                this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow + 37}px` : ((this.itemsElem.length * 37 + 37) + 'px'));
+            } else {
+                this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow}px` : (this.itemsElem.length * 37 + 'px'));
+            }
+            this.elements.divDropdownList.style.maxHeight = `${37 * this.option.maxRow}px`;
             this.elements.divDropdown.style.borderWidth = '1px';
         } else {
             // this.elements.divDropdown.style.display = 'none';
@@ -163,7 +179,12 @@ export default class JsSelect {
                 elm.container.classList.remove('viewed');
             }
         });
-        this.elements.divDropdown.style.height = ((this.data.length + 1) > 6 ? '262px' : ((this.data.length + 1) * 37 + 'px'));
+        if (this.option.search) {
+            this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow + 37}px` : ((this.itemsElem.length * 37 + 37) + 'px'));
+        } else {
+            this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow}px` : (this.itemsElem.length * 37 + 'px'));
+        }
+        this.elements.divDropdownList.style.maxHeight = `${37 * this.option.maxRow}px`;
     }
 
     setValue(value) {
@@ -197,3 +218,42 @@ export default class JsSelect {
         this.onSelectedCallback = callback;
     }
 }
+
+//Auto replace
+document.querySelectorAll('select[data-jsSelect]').forEach(select => {
+    const idSelect = 'js-select-' + parseInt(Math.random() * 100000);
+    const currentClass = select.className;
+    const currentStyle = select.getAttribute('style');
+    const selectElm = document.createElement('div');
+    selectElm.className = currentClass;
+    selectElm.setAttribute('style', currentStyle);
+    selectElm.setAttribute('id', idSelect);
+    select.parentNode.insertBefore(selectElm, select);
+    const data = [];
+    let selected = null;
+    select.querySelectorAll('option').forEach(value => {
+        const id = value.getAttribute('value') ? value.getAttribute('value') : value.innerText;
+        data.push({
+            id: id,
+            name: value.innerText
+        });
+        if (value.hasAttribute('selected')) {
+            selected = id;
+        }
+    });
+    const options = {
+        placeholder: select.getAttribute('data-placeholder'),
+        typing: select.getAttribute('data-typing'),
+        search: select.getAttribute('data-search') === 'true',
+        canNull: select.getAttribute('data-canNull') === 'true',
+    }
+    select.style.display = 'none';
+    const jsselect = new JsSelect('#' + idSelect, data, options);
+    //window[select] = jsselect;
+    jsselect.onSelected((item) => {
+        select.value = jsselect.value;
+    });
+    if (selected) {
+        jsselect.setValue(selected);
+    }
+});

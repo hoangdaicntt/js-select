@@ -22,25 +22,51 @@ npm install --save js-select-hd
 ```
 
 ## Usage
-
+Js Render
 ```js
-const jsselect = new JSSelect('#js-select', [
-  {id: 1, name: 'Độ tuổi'},
-  {id: 2, name: 'Theo nhóm xe'},
-  {id: 3, name: 'Giới tính'},
-  {id: 4, name: 'Xe không có thuê bao'},
-  {id: 5, name: 'Tiêu chí xe'},
-  {id: 6, name: 'Tiêu chí xe 1'},
-  {id: 7, name: 'Tiêu chí xe 2'},
-], {
-  placeholder: 'Chọn tiêu chí lọc',
-  typing: 'Tìm kiếm tiêu chí lọc...',
+<script src="dist/jsselect.js"></script>
+<script>
+    const jsselect = new JSSelect('#js-select', [
+    {id: 1, name: 'Độ tuổi'},
+    {id: 2, name: 'Theo nhóm xe'},
+    {id: 3, name: 'Giới tính'},
+    {id: 4, name: 'Xe không có thuê bao'},
+    {id: 5, name: 'Tiêu chí xe'},
+    {id: 6, name: 'Tiêu chí xe 1'},
+    {id: 7, name: 'Tiêu chí xe 2'},
+    ], {
+    placeholder: 'Chọn tiêu chí lọc',
+    typing: 'Tìm kiếm tiêu chí lọc...',
+    search: false, // Can select null value
+    canNull: false, // Can select null value
+    maxRow: 5 // Max value show
 });
 
-jsselect.onSelected((item) => {
-  console.log('Selected:', item);
-  console.log('Selected ID:', jsselect.value);
+    jsselect.onSelected((item) => {
+    console.log('Selected:', item);
+    console.log('Selected ID:', jsselect.value);
 })
+</script>
+```
+
+Html Render
+```js
+<select style="width: 325px;" class="js-select" name="select-x"
+        data-jsSelect="true"
+        data-placeholder="Chọn tiêu chí lọc"
+        data-search="true"
+        data-canNull="true"
+        data-maxRow="6"
+        data-typing="Tìm kiếm tiêu chí lọc...">
+    <option value="1">Độ tuổi</option>
+    <option value="2">Theo nhóm xe</option>
+    <option value="3">Giới tính</option>
+    <option value="4">Xe không có thuê bao</option>
+    <option selected value="5">Tiêu chí xe</option>
+    <option value="6">Tiêu chí xe 1</option>
+    <option value="7">Tiêu chí xe 2</option>
+</select>
+<script src="dist/jsselect.js"></script>
 ```
 
 ## Constructors
