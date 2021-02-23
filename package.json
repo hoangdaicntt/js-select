@@ -9,7 +9,7 @@
     "watch": "webpack --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "hoangdaicntt",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^5.0.1",
@@ -25,5 +25,13 @@
   "dependencies": {
     "color": "^3.1.2",
     "lodash": "^4.17.19"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangdaicntt/js-select.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hoangdaicntt/js-select/issues"
+  },
+  "homepage": "https://github.com/hoangdaicntt/js-select#readme"
 }
