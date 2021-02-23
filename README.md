@@ -1,6 +1,6 @@
 # js-select [![npm](http://img.shields.io/npm/v/js-select-hd.svg?style=flat)](https://badge.fury.io/js/js-select) [![Build Status](https://travis-ci.org/hoangdaicntt/js-select-hd.svg?branch=master)](https://travis-ci.org/hoangdaicntt/js-select-hd) [![Coverage Status](https://coveralls.io/repos/hoangdaicntt/js-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/hoangdaicntt/js-select?branch=master)
 
-[![NPM](https://nodei.co/npm/js-select-hd.png?downloads=true)](https://nodei.co/npm/js-select/)
+[![NPM](https://nodei.co/npm/js-select-hd.png?downloads=true)](https://nodei.co/npm/js-select-hd/)
 
 > The select library uses pure js for everyone. View demo [here](https://js-select.tiiny.site/)
 
