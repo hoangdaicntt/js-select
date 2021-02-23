@@ -5,13 +5,13 @@ const JavaScriptObfuscator = require('webpack-obfuscator');
 
 module.exports = {
     entry: {
-        gerber_viewer: './src/index.js',
+        jsselect: './src/index.js',
     },
     mode: "production",
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        library: 'HDGerber',
+        library: 'JSSelect',
         libraryExport: 'default'
     },
     optimization: {

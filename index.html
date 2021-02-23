@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="js-select" style="width: 325px"></div>
+
+<script src="dist/jsselect.js"></script>
+<script>
+    const jsselect = new JSSelect('#js-select', [
+        {id: 1, name: 'Độ tuổi'},
+        {id: 2, name: 'Theo nhóm xe'},
+        {id: 3, name: 'Giới tính'},
+        {id: 4, name: 'Xe không có thuê bao'},
+        {id: 5, name: 'Tiêu chí xe'},
+        {id: 6, name: 'Tiêu chí xe 1'},
+        {id: 7, name: 'Tiêu chí xe 2'},
+    ], {
+        placeholder: 'Chọn tiêu chí lọc',
+        typing: 'Tìm kiếm tiêu chí lọc...',
+    });
+
+    jsselect.onSelected((item) => {
+        console.log('Selected:', item);
+        console.log('Selected ID:', jsselect.value);
+    })
+</script>
+</body>
+</html>
