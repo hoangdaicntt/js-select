@@ -212,6 +212,13 @@ export default class JsSelect {
         this.elements.searchInput.addEventListener('keyup', () => {
             this.filterItem();
         });
+        this.elements.searchInput.addEventListener('focus', () => {
+            this.elements.divDropdownInput.classList.add('focus');
+        });
+
+        this.elements.searchInput.addEventListener('blur', () => {
+            this.elements.divDropdownInput.classList.remove('focus');
+        });
     }
 
     onSelected(callback) {
