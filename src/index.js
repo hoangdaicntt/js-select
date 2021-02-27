@@ -15,6 +15,7 @@ export default class JsSelect {
             search: true,
             canNull: true,
             maxRow: 5,
+            canCloseDropdown: true,
             ...options,
         }
         this.constainerElem = document.querySelector(dom);
@@ -144,24 +145,26 @@ export default class JsSelect {
     }
 
     toggleDropDown() {
-        if (!this.showDropdown) {
-            // this.elements.divDropdown.style.display = 'block';
-            this.elements.searchInput.focus();
-            this.elements.divInput.classList.add('show-dropdown');
-            if (this.option.search) {
-                this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow + 37}px` : ((this.itemsElem.length * 37 + 37) + 'px'));
+        if (this.option.canCloseDropdown) {
+            if (!this.showDropdown) {
+                // this.elements.divDropdown.style.display = 'block';
+                this.elements.searchInput.focus();
+                this.elements.divInput.classList.add('show-dropdown');
+                if (this.option.search) {
+                    this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow + 37}px` : ((this.itemsElem.length * 37 + 37) + 'px'));
+                } else {
+                    this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow}px` : (this.itemsElem.length * 37 + 'px'));
+                }
+                this.elements.divDropdownList.style.maxHeight = `${37 * this.option.maxRow}px`;
+                this.elements.divDropdown.style.borderWidth = '1px';
             } else {
-                this.elements.divDropdown.style.height = (this.itemsElem.length > this.option.maxRow ? `${37 * this.option.maxRow}px` : (this.itemsElem.length * 37 + 'px'));
+                // this.elements.divDropdown.style.display = 'none';
+                this.elements.divInput.classList.remove('show-dropdown');
+                this.elements.divDropdown.style.height = '0px';
+                this.elements.divDropdown.style.borderWidth = '0px';
             }
-            this.elements.divDropdownList.style.maxHeight = `${37 * this.option.maxRow}px`;
-            this.elements.divDropdown.style.borderWidth = '1px';
-        } else {
-            // this.elements.divDropdown.style.display = 'none';
-            this.elements.divInput.classList.remove('show-dropdown');
-            this.elements.divDropdown.style.height = '0px';
-            this.elements.divDropdown.style.borderWidth = '0px';
+            this.showDropdown = !this.showDropdown;
         }
-        this.showDropdown = !this.showDropdown;
     }
 
     filterItem() {
@@ -196,6 +199,22 @@ export default class JsSelect {
 
     destroy() {
         this.elements.divMain.remove();
+    }
+
+    close() {
+        const check = this.option.canCloseDropdown;
+        this.option.canCloseDropdown = true;
+        this.showDropdown = true;
+        this.toggleDropDown();
+        this.option.canCloseDropdown = check;
+    }
+
+    open() {
+        const check = this.option.canCloseDropdown;
+        this.option.canCloseDropdown = true;
+        this.showDropdown = false;
+        this.toggleDropDown();
+        this.option.canCloseDropdown = check;
     }
 
     events() {
