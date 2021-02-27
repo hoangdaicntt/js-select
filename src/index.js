@@ -18,7 +18,7 @@ export default class JsSelect {
             canCloseDropdown: true,
             ...options,
         }
-        this.constainerElem = document.querySelector(dom);
+        this.constainerElem = ((typeof dom) === 'string' ? document.querySelector(dom) : dom);
         this.elements = {};
         this.itemsElem = {};
         this.showDropdown = true;
