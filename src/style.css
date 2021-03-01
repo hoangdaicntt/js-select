@@ -193,5 +193,5 @@ span.js-select-item-title {
 }
 
 .js-select-input.show-dropdown .js-select-input-img {
-    transform: rotate(180deg);
+    transform: rotate(-180deg);
 }
