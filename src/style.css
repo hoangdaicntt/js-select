@@ -187,3 +187,11 @@ span.js-select-item-title {
 .js-select-dropdown-input.focus:after {
     width: 100%;
 }
+
+.js-select-input-img {
+    transition: all 0.2s;
+}
+
+.js-select-input.show-dropdown .js-select-input-img {
+    transform: rotate(180deg);
+}
