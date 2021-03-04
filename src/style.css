@@ -34,7 +34,7 @@
     top: 40px;
     left: 0;
     z-index: 9;
-    width: calc(100% - 2px);
+    width: calc(100% - 0px);
     border: 1px solid #DFE3E9;
     border-radius: 0 0 4px 4px;
     overflow: hidden;

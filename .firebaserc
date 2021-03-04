@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "facebookapp-0001"
+  },
+  "targets": {
+    "facebookapp-0001": {
+      "hosting": {
+        "js-select": [
+          "js-select"
+        ]
+      }
+    }
+  }
+}

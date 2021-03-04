@@ -2,7 +2,7 @@
 
 [![NPM](https://nodei.co/npm/js-select-hd.png?downloads=true)](https://nodei.co/npm/js-select-hd/)
 
-> The select library uses pure js for everyone. View demo [here](https://js-select.tiiny.site/)
+> The select library uses pure js for everyone. View demo [here](https://js-select.web.app/)
 
 ## Features
 - Super fast
