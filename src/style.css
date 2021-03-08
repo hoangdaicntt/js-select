@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 .js-select-input {
     height: 40px;
     background: linear-gradient(360deg, #F2F4F7 0%, #FEFFFF 100%);
@@ -150,7 +154,7 @@ span.js-select-item-title {
 }
 
 .js-select-input.value-null.show-dropdown {
-    border-bottom: none;
+    /*border-bottom: none;*/
     border-radius: 4px 4px 0 0;
 }
 
